@@ -1,20 +1,24 @@
-# blindfold
+# opaq
 
-[![Package Version](https://img.shields.io/hexpm/v/blindfold)](https://hex.pm/packages/blindfold)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/blindfold/)
+[![Package Version](https://img.shields.io/hexpm/v/opaq)](https://hex.pm/packages/opaq)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/opaq/)
 
 ```sh
-gleam add blindfold@1
+gleam add opaq@1
 ```
 ```gleam
-import blindfold
+import opaq
 
 pub fn main() -> Nil {
-  // TODO: An example of the project in use
+  // decode into opaque JSON value
+  let assert Ok(json_value) = json.parse("[1, 2, null]", opaq.decode())
+
+  // convert back to a String
+  opaq.to_string(json_value)
 }
 ```
 
-Further documentation can be found at <https://hexdocs.pm/blindfold>.
+Further documentation can be found at <https://hexdocs.pm/opaq>.
 
 ## Development
 

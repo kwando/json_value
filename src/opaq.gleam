@@ -1,4 +1,7 @@
-//// A JSON value representation that can be used to decode arbitrary JSON structures.
+//// A JSON value representation that can be used to decode arbitrary JSON into an opaque value
+//// that can be turned back into JSON again.
+////
+//// Sometimes you have a JSON value but it is opaque to your application.
 
 import gleam/dict
 import gleam/dynamic/decode
@@ -6,18 +9,18 @@ import gleam/json
 import gleam/list
 import gleam/pair
 
-/// A JSON value representation that can be used to decode arbitrary JSON structures.
-pub opaque type Value {
+pub opaque type Json {
   JsonNull
   JsonString(String)
   JsonInt(Int)
   JsonBool(Bool)
   JsonFloat(Float)
-  JsonArray(List(Value))
-  JsonObject(dict.Dict(String, Value))
+  JsonArray(List(Json))
+  JsonObject(dict.Dict(String, Json))
 }
 
-pub fn decode() {
+/// Decodes a value into an opaque JSON value.
+pub fn decode() -> decode.Decoder(Json) {
   use <- decode.recursive
   decode.one_of(decode.failure(JsonNull, "no json"), [
     decode.string |> decode.map(JsonString),
@@ -31,7 +34,8 @@ pub fn decode() {
   ])
 }
 
-pub fn to_json(value: Value) {
+/// Convert a `opaq.Json` value to a `json.Json` value.
+pub fn to_json(value: Json) -> json.Json {
   case value {
     JsonString(s) -> json.string(s)
     JsonInt(i) -> json.int(i)
@@ -42,4 +46,11 @@ pub fn to_json(value: Value) {
       json.object(dict.to_list(obj) |> list.map(pair.map_second(_, to_json)))
     JsonNull -> json.null()
   }
+}
+
+/// Convert a `opaq.Json` to a JSON string.
+pub fn to_string(value: Json) -> String {
+  value
+  |> to_json
+  |> json.to_string
 }
