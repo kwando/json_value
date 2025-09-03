@@ -47,9 +47,7 @@ pub fn to_json(value: JsonValue) -> json.Json {
 // These are just convenience wrappers around the functions from the JSON module
 /// Convert a `json_value.Json` to a JSON string.
 pub fn to_string(value: JsonValue) -> String {
-  value
-  |> to_json
-  |> json.to_string
+  value |> to_json |> json.to_string
 }
 
 /// Parse a `String` to a `json_value.Json`
