@@ -20,6 +20,6 @@ pub fn blindfold_test() {
 }
 
 fn roundtrip(value: String) {
-  let assert Ok(json_value) = json.parse(value, json_value.decode())
+  let assert Ok(json_value) = json.parse(value, json_value.decoder())
   assert value == json_value.to_string(json_value)
 }
