@@ -7,18 +7,18 @@ import gleam/function
 import gleam/json
 import gleam/string_tree
 
-pub type Json {
+pub type JsonValue {
   Null
   String(String)
   Int(Int)
   Bool(Bool)
   Float(Float)
-  Array(List(Json))
-  Object(dict.Dict(String, Json))
+  Array(List(JsonValue))
+  Object(dict.Dict(String, JsonValue))
 }
 
 /// Decodes a value into an json_value.Json.
-pub fn decoder() -> decode.Decoder(Json) {
+pub fn decoder() -> decode.Decoder(JsonValue) {
   use <- decode.recursive
   decode.one_of(decode.string |> decode.map(String), [
     decode.int |> decode.map(Int),
@@ -32,7 +32,7 @@ pub fn decoder() -> decode.Decoder(Json) {
 }
 
 /// Convert a `json_value.Json` value to a `json_value.Json` value.
-pub fn to_json(value: Json) -> json.Json {
+pub fn to_json(value: JsonValue) -> json.Json {
   case value {
     String(s) -> json.string(s)
     Int(i) -> json.int(i)
@@ -46,23 +46,23 @@ pub fn to_json(value: Json) -> json.Json {
 
 // These are just convenience wrappers around the functions from the JSON module
 /// Convert a `json_value.Json` to a JSON string.
-pub fn to_string(value: Json) -> String {
+pub fn to_string(value: JsonValue) -> String {
   value
   |> to_json
   |> json.to_string
 }
 
 /// Parse a `String` to a `json_value.Json`
-pub fn parse(json: String) -> Result(Json, json.DecodeError) {
+pub fn parse(json: String) -> Result(JsonValue, json.DecodeError) {
   json.parse(json, decoder())
 }
 
 /// Parse a `BitArray` to a `json_value.Json`
-pub fn parse_bits(json: BitArray) -> Result(Json, json.DecodeError) {
+pub fn parse_bits(json: BitArray) -> Result(JsonValue, json.DecodeError) {
   json.parse_bits(json, decoder())
 }
 
 /// Convert a `json_value.Json` to a `string_tree.StringTree`
-pub fn to_string_tree(value: Json) -> string_tree.StringTree {
+pub fn to_string_tree(value: JsonValue) -> string_tree.StringTree {
   value |> to_json |> json.to_string_tree
 }
