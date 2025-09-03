@@ -5,6 +5,7 @@ import gleam/dict
 import gleam/dynamic/decode
 import gleam/function
 import gleam/json
+import gleam/string_tree
 
 pub type Json {
   Null
@@ -53,16 +54,16 @@ pub fn to_string(value: Json) -> String {
 }
 
 /// Parse a `String` to a `json_value.Json`
-pub fn parse(json: String) {
+pub fn parse(json: String) -> Result(Json, json.DecodeError) {
   json.parse(json, decoder())
 }
 
 /// Parse a `BitArray` to a `json_value.Json`
-pub fn parse_bits(json: BitArray) {
+pub fn parse_bits(json: BitArray) -> Result(Json, json.DecodeError) {
   json.parse_bits(json, decoder())
 }
 
 /// Convert a `json_value.Json` to a `string_tree.StringTree`
-pub fn to_string_tree(value: Json) {
+pub fn to_string_tree(value: Json) -> string_tree.StringTree {
   value |> to_json |> json.to_string_tree
 }
