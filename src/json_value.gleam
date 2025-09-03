@@ -20,8 +20,7 @@ pub type Json {
 /// Decodes a value into an json_value.Json.
 pub fn decoder() -> decode.Decoder(Json) {
   use <- decode.recursive
-  decode.one_of(decode.failure(Null, "no json"), [
-    decode.string |> decode.map(String),
+  decode.one_of(decode.string |> decode.map(String), [
     decode.int |> decode.map(Int),
     decode.bool |> decode.map(Bool),
     decode.float |> decode.map(Float),
