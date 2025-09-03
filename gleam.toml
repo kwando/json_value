@@ -1,12 +1,12 @@
-name = "opaq"
+name = "json_value"
 version = "1.0.0"
 
 # Fill out these fields if you intend to generate HTML documentation or publish
 # your project to the Hex package manager.
 #
-description = "Decode JSON to an opaque value"
+description = "Decode JSON to an json_valueue value"
 licences = ["MIT"]
-repository = { type = "github", user = "kwando", repo = "opaq" }
+repository = { type = "github", user = "kwando", repo = "json_value" }
 # links = [{ title = "Website", href = "" }]
 #
 # For a full reference of all the available options, you can have a look at

@@ -1,15 +1,14 @@
-//// A JSON value representation that can be used to decode arbitrary JSON into an opaque value
+//// A JSON value representation that can be used to decode arbitrary JSON into an json_valueue value
 //// that can be turned back into JSON again.
 ////
-//// Sometimes you have a JSON value but it is opaque to your application.
+//// Sometimes you have a JSON value but it is json_valueue to your application.
 
 import gleam/dict
 import gleam/dynamic/decode
+import gleam/function
 import gleam/json
-import gleam/list
-import gleam/pair
 
-pub opaque type Json {
+pub type Json {
   JsonNull
   JsonString(String)
   JsonInt(Int)
@@ -42,8 +41,7 @@ pub fn to_json(value: Json) -> json.Json {
     JsonBool(b) -> json.bool(b)
     JsonFloat(f) -> json.float(f)
     JsonArray(arr) -> json.array(arr, to_json)
-    JsonObject(obj) ->
-      json.object(dict.to_list(obj) |> list.map(pair.map_second(_, to_json)))
+    JsonObject(obj) -> json.dict(obj, function.identity, to_json)
     JsonNull -> json.null()
   }
 }

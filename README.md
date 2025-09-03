@@ -1,24 +1,24 @@
-# opaq
+# json_value
 
-[![Package Version](https://img.shields.io/hexpm/v/opaq)](https://hex.pm/packages/opaq)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/opaq/)
+[![Package Version](https://img.shields.io/hexpm/v/json_value)](https://hex.pm/packages/json_value)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/json_value/)
 
 ```sh
-gleam add opaq@1
+gleam add json_value@1
 ```
 ```gleam
-import opaq
+import json_value
 
 pub fn main() -> Nil {
-  // decode into opaque JSON value
-  let assert Ok(json_value) = json.parse("[1, 2, null]", opaq.decode())
+  // decode into json_value JSON value
+  let assert Ok(json_value) = json.parse("[1, 2, null]", json_value.decode())
 
   // convert back to a String
-  opaq.to_string(json_value)
+  json_value.to_string(json_value)
 }
 ```
 
-Further documentation can be found at <https://hexdocs.pm/opaq>.
+Further documentation can be found at <https://hexdocs.pm/json_value>.
 
 ## Development
 

@@ -1,6 +1,6 @@
 import gleam/json
 import gleeunit
-import opaq
+import json_value
 
 pub fn main() -> Nil {
   gleeunit.main()
@@ -20,6 +20,6 @@ pub fn blindfold_test() {
 }
 
 fn roundtrip(value: String) {
-  let assert Ok(json_value) = json.parse(value, opaq.decode())
-  assert value == opaq.to_string(json_value)
+  let assert Ok(json_value) = json.parse(value, json_value.decode())
+  assert value == json_value.to_string(json_value)
 }
