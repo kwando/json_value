@@ -10,15 +10,15 @@ gleam add json_value@1
 import json_value
 
 pub fn main() -> Nil {
-  // decode into json_value.Json value
-  let assert Ok(json_value) = json.parse("[1, 2, null]", json_value.decode())
+  // decode into json_value.JsonValue value
+  let assert Ok(json_data) = json.parse("[1, 2, null]", json_value.decode())
 
   // convert back to a String
-  json_value.to_string(json_value)
+  json_value.to_string(json_data)
 
   // convert it to a `json.Json` so it can used in another Json structure
   json.object([
-    #("data", json_value.to_json(json_value))
+    #("data", json_value.to_json(json_data))
   ])
 }
 ```

@@ -1,4 +1,4 @@
-//// A JSON value representation that can be used to decode arbitrary JSON into `json_value.Json`
+//// A JSON value representation that can be used to decode arbitrary JSON into `json_value.JsonValue`
 //// that can be manipulated and turned back into JSON again.
 
 import gleam/dict
