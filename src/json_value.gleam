@@ -1,5 +1,5 @@
-//// A JSON value representation that can be used to decode arbitrary JSON into json_value.Json
-//// that can be manipulated and then turned back into JSON again.
+//// A JSON value representation that can be used to decode arbitrary JSON into `json_value.Json`
+//// that can be manipulated and turned back into JSON again.
 
 import gleam/dict
 import gleam/dynamic/decode
