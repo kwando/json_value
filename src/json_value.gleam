@@ -5,6 +5,7 @@ import gleam/dict
 import gleam/dynamic/decode
 import gleam/function
 import gleam/json
+import gleam/list
 import gleam/string_tree
 
 pub type JsonValue {
@@ -31,7 +32,7 @@ pub fn decoder() -> decode.Decoder(JsonValue) {
   ])
 }
 
-/// Convert a `json_value.Json` value to a `json_value.Json` value.
+/// Convert a `JsonValue` to a `json.Json` value.
 pub fn to_json(value: JsonValue) -> json.Json {
   case value {
     String(s) -> json.string(s)
@@ -64,3 +65,28 @@ pub fn parse_bits(json: BitArray) -> Result(JsonValue, json.DecodeError) {
 pub fn to_string_tree(value: JsonValue) -> string_tree.StringTree {
   value |> to_json |> json.to_string_tree
 }
+
+/// Create a JSON object from a list of key-value pairs.
+pub fn object(entries: List(#(String, JsonValue))) -> JsonValue {
+  Object(dict.from_list(entries))
+}
+
+/// Create a JSON array by mapping a list of values into `JsonValue`s.
+pub fn array(values: List(a), mapper: fn(a) -> JsonValue) -> JsonValue {
+  Array(list.map(values, mapper))
+}
+
+/// A `JsonValue` representing an integer.
+pub const int = Int
+
+/// A `JsonValue` representing a float.
+pub const float = Float
+
+/// A `JsonValue` representing a boolean.
+pub const bool = Bool
+
+/// A `JsonValue` representing `null`.
+pub const null = Null
+
+/// A `JsonValue` representing a string.
+pub const string = String
