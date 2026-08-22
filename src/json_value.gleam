@@ -90,3 +90,6 @@ pub const null = Null
 
 /// A `JsonValue` representing a string.
 pub const string = String
+
+/// Create a JSON array from values that are already `JsonValue`s.
+pub const preprocessed_array = Array
