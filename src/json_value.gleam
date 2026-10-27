@@ -18,7 +18,7 @@ pub type JsonValue {
   Object(dict.Dict(String, JsonValue))
 }
 
-/// Decodes a value into an json_value.Json.
+/// Decode a value into a `JsonValue`.
 ///
 /// On JavaScript, integral numbers decode as `Int`, even when the JSON used
 /// decimal or exponent notation (for example, `1.0` or `1e0`). The JavaScript
@@ -51,22 +51,22 @@ pub fn to_json(value: JsonValue) -> json.Json {
 }
 
 // These are just convenience wrappers around the functions from the JSON module
-/// Convert a `json_value.Json` to a JSON string.
+/// Convert a `JsonValue` to a JSON string.
 pub fn to_string(value: JsonValue) -> String {
   value |> to_json |> json.to_string
 }
 
-/// Parse a `String` to a `json_value.Json`
+/// Parse a `String` to a `JsonValue`.
 pub fn parse(json: String) -> Result(JsonValue, json.DecodeError) {
   json.parse(json, decoder())
 }
 
-/// Parse a `BitArray` to a `json_value.Json`
+/// Parse a `BitArray` to a `JsonValue`.
 pub fn parse_bits(json: BitArray) -> Result(JsonValue, json.DecodeError) {
   json.parse_bits(json, decoder())
 }
 
-/// Convert a `json_value.Json` to a `string_tree.StringTree`
+/// Convert a `JsonValue` to a `string_tree.StringTree`.
 pub fn to_string_tree(value: JsonValue) -> string_tree.StringTree {
   value |> to_json |> json.to_string_tree
 }

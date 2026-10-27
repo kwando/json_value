@@ -7,11 +7,12 @@
 gleam add json_value@1
 ```
 ```gleam
+import gleam/json
 import json_value
 
-pub fn main() -> Nil {
+pub fn main() -> json.Json {
   // decode into json_value.JsonValue value
-  let assert Ok(json_data) = json.parse("[1, 2, null]", json_value.decode())
+  let assert Ok(json_data) = json_value.parse("[1, 2, null]")
 
   // convert back to a String
   json_value.to_string(json_data)
@@ -38,6 +39,6 @@ JavaScript returns `Int(1)`, not the original `Float` variant.
 ## Development
 
 ```sh
-gleam run   # Run the project
-gleam test  # Run the tests
+gleam test                       # Run the tests on Erlang
+gleam test --target javascript   # Run the tests on JavaScript
 ```
