@@ -19,6 +19,11 @@ pub type JsonValue {
 }
 
 /// Decodes a value into an json_value.Json.
+///
+/// On JavaScript, integral numbers decode as `Int`, even when the JSON used
+/// decimal or exponent notation (for example, `1.0` or `1e0`). The JavaScript
+/// JSON parser does not preserve this distinction. On Erlang, those JSON
+/// numbers decode as `Float`.
 pub fn decoder() -> decode.Decoder(JsonValue) {
   use <- decode.recursive
   decode.one_of(decode.string |> decode.map(String), [

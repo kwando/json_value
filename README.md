@@ -25,6 +25,16 @@ pub fn main() -> Nil {
 
 Further documentation can be found at <https://hexdocs.pm/json_value>.
 
+## Numbers across targets
+
+On Erlang, parsing `1` produces `Int(1)`, while `1.0` and `1e0` produce
+`Float(1.0)`. On JavaScript, all three produce `Int(1)`: its JSON parser uses
+one number type and does not preserve the original number syntax.
+Non-integral numbers, such as `1.5`, decode as `Float` on both targets.
+
+Consequently, serializing and parsing a value such as `Float(1.0)` on
+JavaScript returns `Int(1)`, not the original `Float` variant.
+
 ## Development
 
 ```sh
